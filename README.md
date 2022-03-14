@@ -1,4 +1,4 @@
-# GSB
+# GSB Service Web
 GSB AppliFrais Android Application with API <br>
 <a href="https://www.figma.com/proto/j14wK5qanIzgDU89yGrELE/Untitled?node-id=2%3A69&scaling=scale-down&page-id=0%3A1&starting-point-node-id=2%3A69">Maquette FIGMA</a>
 

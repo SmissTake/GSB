@@ -1,6 +1,6 @@
 # GSB
 GSB AppliFrais Android Application with API <br>
-<a href="https://www.figma.com/file/j14wK5qanIzgDU89yGrELE/Untitled?node-id=0%3A1">Maquette FIGMA</a>
+<a href="https://www.figma.com/proto/j14wK5qanIzgDU89yGrELE/Untitled?node-id=2%3A69&scaling=scale-down&page-id=0%3A1&starting-point-node-id=2%3A69">Maquette FIGMA</a>
 
 <h2>Le projet</h2>
 Le laboratoire Galaxy Swiss Bourdin (GSB) est amené dans ses différentes activités à contacter les

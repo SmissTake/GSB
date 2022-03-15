@@ -10,45 +10,51 @@
         android:id="@+id/tvTitre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tvTitre"
+        android:text="Recherche un médecin par nom"
         android:textSize="@dimen/tvTitre"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.164" />
+        app:layout_constraintVertical_bias="0.08" />
 
-    <Button
-        android:id="@+id/btnDep"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btnDepar"
+    <EditText
+        android:id="@+id/etNomMed"
+        android:layout_width="236dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="@string/entrez_nom_med"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.091"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.351" />
+        app:layout_constraintVertical_bias="0.169" />
 
     <Button
-        android:id="@+id/btnMedDep"
+        android:id="@+id/btnRechNomMed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btnMedDepar"
+        android:layout_marginTop="42dp"
+        android:text="@string/rechercher"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.942"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.455" />
+        app:layout_constraintVertical_bias="0.157" />
 
-    <Button
-        android:id="@+id/btnNomMed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btnNomMed"
+    <ListView
+        android:id="@+id/lvResultNomMed"
+        android:layout_width="373dp"
+        android:layout_height="484dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.568" />
+        app:layout_constraintVertical_bias="0.843" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

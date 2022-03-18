@@ -19,6 +19,8 @@
         <activity android:name=".RechercheNom"></activity>
         <activity android:name=".MedecinDepartement"></activity>
         <activity android:name=".Departement"></activity>
+
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

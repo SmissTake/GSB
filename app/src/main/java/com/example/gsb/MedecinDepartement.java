@@ -2,6 +2,7 @@ package com.example.gsb;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,7 +26,7 @@ public class MedecinDepartement extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
+        Log.i("TAG", "######################## onCreate: OK ########################");
         setContentView(R.layout.medecin_departement);
 
         btnRechMedDep = (Button) findViewById(R.id.btnRechMedDep);
@@ -35,6 +36,7 @@ public class MedecinDepartement extends AppCompatActivity{
             public void onClick(View view) {
                 RequestQueue queue = Volley.newRequestQueue(MedecinDepartement.this);
                 String url = "http://gsb.siochaptalqper.fr/ws/lesmedecins/nom/chubilleau";
+                Log.i("TAG", "######################## onClick: OK ########################");
 
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                         new Response.Listener<String>() {

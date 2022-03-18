@@ -26,7 +26,6 @@ public class MedecinDepartement extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        Log.i("TAG", "######################## onCreate: OK ########################");
         setContentView(R.layout.medecin_departement);
 
         btnRechMedDep = (Button) findViewById(R.id.btnRechMedDep);

@@ -3,8 +3,11 @@ package com.example.gsb;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -13,16 +16,25 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class RechercheNom extends AppCompatActivity{
 
     private EditText etNomMed;
     private Button btnRechNomMed;
+    private TextView messageRechMed;
+
+    private ListView lvResultNomMed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -31,6 +43,7 @@ public class RechercheNom extends AppCompatActivity{
 
         btnRechNomMed = (Button) findViewById(R.id.btnRechNomMed);
         etNomMed = (EditText) findViewById(R.id.etNomMed);
+        messageRechMed = (TextView) findViewById(R.id.messageRechNom);
 
         btnRechNomMed.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -45,8 +58,38 @@ public class RechercheNom extends AppCompatActivity{
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
-                                    Toast.makeText(RechercheNom.this, "ça marche !!!", Toast.LENGTH_SHORT).show();
-                                    Log.i("TAG", response);
+                                    Toast.makeText(RechercheNom.this, "ça marche !!!", Toast.LENGTH_SHORT).show();//DEVELOPPEMENT
+
+                                    if (response.equals("{}")) {
+                                        Toast.makeText(RechercheNom.this, "Aucun médecin dans ce département", Toast.LENGTH_SHORT).show();
+                                        messageRechMed.setText("Aucun médecin dans ce département");
+                                        Log.i("TAG", "################# AUCUN MEDECIN ####################");//DEVELOPPEMENT
+
+                                    } else {
+                                        Log.i("TAG", "################# LISTMEDECIN NON NULL ####################");//DEVELOPPEMENT
+                                        ObjectMapper mapper = new ObjectMapper();
+                                        try {
+                                            ArrayList<Medecin> medecinList = mapper.readValue(response, new TypeReference<ArrayList<Medecin>>() {});
+
+                                            lvResultNomMed = findViewById(R.id.lvResultNomMed);
+                                            ArrayAdapter<Medecin> adapter = new ArrayAdapter<Medecin>(getBaseContext(), android.R.layout.simple_list_item_1, medecinList);
+                                            lvResultNomMed.setAdapter(adapter);
+
+
+                                            if (medecinList.size()>1){
+                                                messageRechMed.setText(medecinList.size() + " médecins trouvés");
+                                            }else {messageRechMed.setText(medecinList.size() + " médecin trouvé");}
+                                            System.out.println(medecinList);
+
+                                            for(Medecin medecin : medecinList) {
+                                                System.out.println(medecin.getNom());
+                                            }
+
+                                        } catch (IOException e) {
+                                            Log.e("TAG",e.toString());
+                                        }
+
+                                    }
                                 }
                             }, new Response.ErrorListener() {
                         @Override

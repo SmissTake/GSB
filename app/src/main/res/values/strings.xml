@@ -7,6 +7,6 @@
     <string name="voir_les_medecins_dep">Voir les médecins d\'un département</string>
     <string name="rechercher">Rechercher</string>
     <string name="entrez_num_dep">Entrez numéro de département</string>
-    <string name="liste_des_dep">Liste des départements comportnant un médecin</string>
+    <string name="liste_des_dep">Liste des départements comportant un médecin</string>
     <string name="entrez_nom_med">Entrez le nom d\'un médecin</string>
 </resources>

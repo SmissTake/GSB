@@ -2,8 +2,12 @@ package com.example.gsb;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,45 +24,48 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Departement extends AppCompatActivity{
+public class Departement extends AppCompatActivity {
 
     private ListView lvListDep;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.departement);
 
         RequestQueue queue = Volley.newRequestQueue(Departement.this);
-        String url = "https://gsb.siochaptalqper.fr/ws/lesdepartements";
+        String url = "https://gsb.siochaptalqper.fr/ws/lesdepartements/format/json";
         Log.i("TAG", "######################## onClick: OK ########################");
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText(Departement.this, "ça marche !!!", Toast.LENGTH_SHORT).show();//DEVELOPPEMENT
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(Departement.this, "ça marche !!!", Toast.LENGTH_SHORT).show();//DEVELOPPEMENT
 
-                if (response.equals("{}")) {
-                    Toast.makeText(Departement.this, "Aucun médecin dans ce département", Toast.LENGTH_SHORT).show();
-                    Log.i("TAG", "################# AUCUN MEDECIN ####################");//DEVELOPPEMENT
+                        if (response.equals("{}")) {
+                            Toast.makeText(Departement.this, "Aucun médecin dans ce département", Toast.LENGTH_SHORT).show();
+                            Log.i("TAG", "################# AUCUN MEDECIN ####################");//DEVELOPPEMENT
 
-                    Log.i("TAG", "################# LISTMEDECIN NON NULL ####################");//DEVELOPPEMENT
-                    ObjectMapper mapper = new ObjectMapper();
-                    try {
+                            Log.i("TAG", "################# LISTMEDECIN NON NULL ####################");//DEVELOPPEMENT
+                        } else {
+                            ObjectMapper mapper = new ObjectMapper();
 
-                        lvListDep = findViewById(R.id.lvListDep);
-                        ArrayAdapter adapter = new ArrayAdapter(getBaseContext(), android.R.layout.simple_list_item_1, response);
-                        lvListDep.setAdapter(adapter);
+                            try {
+                                ArrayList<DepartementObjet> departement = mapper.readValue(response, new TypeReference<ArrayList<DepartementObjet>>() {});
 
-                        System.out.println(response);
+                                lvListDep = findViewById(R.id.lvListDep);
+                                ArrayAdapter<DepartementObjet> adapter = new ArrayAdapter<DepartementObjet>(getBaseContext(), android.R.layout.simple_list_item_1, departement);
+                                lvListDep.setAdapter(adapter);
 
-                    } catch (IOException e) {
-                        Log.e("TAG",e.toString());
+                                System.out.println(response);
+
+                            } catch (IOException e) {
+                                Log.e("TAG", e.toString());
+                            }
+                        }
                     }
-                }
-            }
-            }, new Response.ErrorListener() {
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(Departement.this, "ça marche pas...", Toast.LENGTH_SHORT).show();//DEVELOPPEMENT

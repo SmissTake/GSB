@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -29,6 +30,7 @@ public class MedecinDepartement extends AppCompatActivity{
 
     private EditText etNumDep;
     private Button btnRechMedDep;
+    private TextView messageMedDep;
     private int numDep;
     private ListView lvResultMedDep;
 
@@ -39,7 +41,7 @@ public class MedecinDepartement extends AppCompatActivity{
 
         btnRechMedDep = (Button) findViewById(R.id.btnRechMedDep);
         etNumDep = (EditText) findViewById(R.id.etNumDep);
-
+        messageMedDep = (TextView) findViewById(R.id.messageMedDep);
         btnRechMedDep.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -60,6 +62,7 @@ public class MedecinDepartement extends AppCompatActivity{
 
                                         if (response.equals("{}")) {
                                             Toast.makeText(MedecinDepartement.this, "Aucun médecin dans ce département", Toast.LENGTH_SHORT).show();
+                                            messageMedDep.setText("Aucun médecin dans ce département");
                                             Log.i("TAG", "################# AUCUN MEDECIN ####################");//DEVELOPPEMENT
 
                                         } else {
@@ -72,6 +75,10 @@ public class MedecinDepartement extends AppCompatActivity{
                                                 ArrayAdapter<Medecin> adapter = new ArrayAdapter<Medecin>(getBaseContext(), android.R.layout.simple_list_item_1, medecinList);
                                                 lvResultMedDep.setAdapter(adapter);
 
+
+                                                if (medecinList.size()>1){
+                                                    messageMedDep.setText(medecinList.size() + " médecins trouvés");
+                                                }else {messageMedDep.setText(medecinList.size() + " médecin trouvé");}
                                                 System.out.println(medecinList);
 
                                                 for(Medecin medecin : medecinList) {
@@ -87,6 +94,7 @@ public class MedecinDepartement extends AppCompatActivity{
                                 }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
+                                messageMedDep.setText("Aucun médecin dans ce département");
                                 Toast.makeText(MedecinDepartement.this, "ça marche pas...", Toast.LENGTH_SHORT).show();//DEVELOPPEMENT
                                 Log.i("TAG", error.toString());//DEVELOPPEMENT
                             }

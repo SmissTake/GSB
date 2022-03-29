@@ -35,22 +35,16 @@ public class Departement extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(Departement.this);
         String url = "https://gsb.siochaptalqper.fr/ws/lesdepartements/format/json";
-        Log.i("TAG", "######################## onClick: OK ########################");
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Toast.makeText(Departement.this, "ça marche !!!", Toast.LENGTH_SHORT).show();//DEVELOPPEMENT
 
                         if (response.equals("{}")) {
-                            Toast.makeText(Departement.this, "Aucun médecin dans ce département", Toast.LENGTH_SHORT).show();
-                            Log.i("TAG", "################# AUCUN MEDECIN ####################");//DEVELOPPEMENT
-
-                            Log.i("TAG", "################# LISTMEDECIN NON NULL ####################");//DEVELOPPEMENT
+                            Toast.makeText(Departement.this, "Aucun Departement", Toast.LENGTH_SHORT).show();
                         } else {
                             ObjectMapper mapper = new ObjectMapper();
-
                             try {
                                 ArrayList<DepartementObjet> departement = mapper.readValue(response, new TypeReference<ArrayList<DepartementObjet>>() {});
 
@@ -58,18 +52,16 @@ public class Departement extends AppCompatActivity {
                                 ArrayAdapter<DepartementObjet> adapter = new ArrayAdapter<DepartementObjet>(getBaseContext(), android.R.layout.simple_list_item_1, departement);
                                 lvListDep.setAdapter(adapter);
 
-                                System.out.println(response);
-
                             } catch (IOException e) {
                                 Log.e("TAG", e.toString());
+                                Toast.makeText(Departement.this, "une erreur est survenu, réessayer plus tard...", Toast.LENGTH_SHORT).show();
+
                             }
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(Departement.this, "ça marche pas...", Toast.LENGTH_SHORT).show();//DEVELOPPEMENT
-                Log.i("TAG", error.toString());//DEVELOPPEMENT
             }
         });
         queue.add(stringRequest);

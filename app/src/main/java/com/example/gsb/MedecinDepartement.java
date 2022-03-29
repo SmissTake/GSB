@@ -70,7 +70,7 @@ public class MedecinDepartement extends AppCompatActivity{
                                                 ArrayList<Medecin> medecinList = mapper.readValue(response, new TypeReference<ArrayList<Medecin>>() {});
 
                                                 lvResultMedDep = findViewById(R.id.lvResultMedDep);
-                                                ArrayAdapter<Medecin> adapter = new ArrayAdapter<Medecin>(getBaseContext(), android.R.layout.simple_list_item_1, medecinList);
+                                                MedecinArrayAdapter adapter = new MedecinArrayAdapter(getBaseContext(), android.R.layout.simple_list_item_1, medecinList);
                                                 lvResultMedDep.setAdapter(adapter);
 
 

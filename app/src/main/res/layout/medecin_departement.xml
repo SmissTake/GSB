@@ -47,8 +47,8 @@
 
     <ListView
         android:id="@+id/lvResultMedDep"
-        android:layout_width="357dp"
-        android:layout_height="492dp"
+        android:layout_width="415dp"
+        android:layout_height="500dp"
         android:layout_marginTop="37dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,4 +66,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.286" />
+
+    <TextView
+        android:id="@+id/coeffLibMedDep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="@string/coefficient_de_notori_t"
+        app:layout_constraintBottom_toTopOf="@+id/lvResultMedDep"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.969"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRechMedDep"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

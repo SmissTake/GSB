@@ -72,7 +72,7 @@ public class RechercheNom extends AppCompatActivity{
                                             ArrayList<Medecin> medecinList = mapper.readValue(response, new TypeReference<ArrayList<Medecin>>() {});
 
                                             lvResultNomMed = findViewById(R.id.lvResultNomMed);
-                                            ArrayAdapter<Medecin> adapter = new ArrayAdapter<Medecin>(getBaseContext(), android.R.layout.simple_list_item_1, medecinList);
+                                            MedecinArrayAdapter adapter = new MedecinArrayAdapter(getBaseContext(), android.R.layout.simple_list_item_1, medecinList);
                                             lvResultNomMed.setAdapter(adapter);
 
 

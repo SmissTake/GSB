@@ -14,16 +14,17 @@ public class Medecin {
     private String typeLibelle;
     private float coefNotoriete;
 
+
     @JsonCreator
-    public Medecin(@JsonProperty("PRA_NUM") int numero, @JsonProperty("PRA_NOM") String nom, @JsonProperty("PRA_PRENOM") String prenom, @JsonProperty("PRA_ADRESSE") String adresse, @JsonProperty("PRA_CP") String PRA_CP, @JsonProperty("PRA_VILLE") String PRA_VILLE, @JsonProperty("TYP_LIBELLE") String TYP_LIBELLE, @JsonProperty("PRA_COEFNOTORIETE") float PRA_COEFNOTORIETE) {
+    public Medecin(@JsonProperty("PRA_NUM") int numero, @JsonProperty("PRA_NOM") String nom, @JsonProperty("PRA_PRENOM") String prenom, @JsonProperty("PRA_ADRESSE") String adresse, @JsonProperty("PRA_CP") String codePostal, @JsonProperty("PRA_VILLE") String ville, @JsonProperty("TYP_LIBELLE") String typeLibelle, @JsonProperty("PRA_COEFNOTORIETE") float coefNotoriete) {
         this.numero = numero;
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
-        this.codePostal = PRA_CP;
-        this.ville = PRA_VILLE;
-        this.typeLibelle = TYP_LIBELLE;
-        this.coefNotoriete = PRA_COEFNOTORIETE;
+        this.codePostal = codePostal;
+        this.ville = ville;
+        this.typeLibelle = typeLibelle;
+        this.coefNotoriete = coefNotoriete;
     }
 
     public Medecin(){
@@ -35,6 +36,10 @@ public class Medecin {
         return "Num " + this.numero + ", " + this.nom + " " + this.prenom + "/n" + this.adresse + ", " + this.codePostal + " " + this.ville + "/n Coef de notoriété : " + this.coefNotoriete;
     }
 
+    /**
+     * Setter de numero Medecin
+     * @param numero
+     */
     public void setNumero(int numero) {
         this.numero = numero;
     }

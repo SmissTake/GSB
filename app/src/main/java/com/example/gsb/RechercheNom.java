@@ -52,21 +52,16 @@ public class RechercheNom extends AppCompatActivity{
                 if(!(etNomMed.getText().toString().equals(""))){
                     RequestQueue queue = Volley.newRequestQueue(RechercheNom.this);
                     String url = "https://gsb.siochaptalqper.fr/ws/lesmedecins/format/json/nom/" + etNomMed.getText();
-                    Log.i("TAG", "######################## onClick: OK ########################");
 
                     StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
-                                    Toast.makeText(RechercheNom.this, "ça marche !!!", Toast.LENGTH_SHORT).show();//DEVELOPPEMENT
 
-                                    if (response.equals("{}")) {
-                                        Toast.makeText(RechercheNom.this, "Aucun médecin dans ce département", Toast.LENGTH_SHORT).show();
+                                    if (response.equals("[]")) {
                                         messageRechMed.setText("Aucun médecin dans ce département");
-                                        Log.i("TAG", "################# AUCUN MEDECIN ####################");//DEVELOPPEMENT
 
                                     } else {
-                                        Log.i("TAG", "################# LISTMEDECIN NON NULL ####################");//DEVELOPPEMENT
                                         ObjectMapper mapper = new ObjectMapper();
                                         try {
                                             ArrayList<Medecin> medecinList = mapper.readValue(response, new TypeReference<ArrayList<Medecin>>() {});
@@ -94,7 +89,7 @@ public class RechercheNom extends AppCompatActivity{
                             }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(RechercheNom.this, "ça marche pas...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RechercheNom.this, "une erreur est survenu, réessayer plus tard...", Toast.LENGTH_SHORT).show();
                             Log.i("TAG", error.toString());
                         }
                     });

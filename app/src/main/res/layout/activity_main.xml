@@ -21,8 +21,8 @@
 
     <Button
         android:id="@+id/btnDep"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/buttonHome"
+        android:layout_height="46dp"
         android:text="@string/btnDepar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
 
     <Button
         android:id="@+id/btnMedDep"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/buttonHome"
         android:layout_height="wrap_content"
         android:text="@string/btnMedDepar"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -43,7 +43,7 @@
 
     <Button
         android:id="@+id/btnNomMed"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/buttonHome"
         android:layout_height="wrap_content"
         android:text="@string/btnNomMed"
         app:layout_constraintBottom_toBottomOf="parent"

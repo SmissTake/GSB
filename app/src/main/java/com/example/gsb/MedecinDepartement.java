@@ -50,21 +50,16 @@ public class MedecinDepartement extends AppCompatActivity{
 
                         RequestQueue queue = Volley.newRequestQueue(MedecinDepartement.this);
                         String url = "https://gsb.siochaptalqper.fr/ws/lesmedecinsdudepartement/format/json/numdep/" + numDep;
-                        Log.i("TAG", "######################## onClick: OK ########################");
 
                         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
-                                        Toast.makeText(MedecinDepartement.this, "ça marche !!!", Toast.LENGTH_SHORT).show();//DEVELOPPEMENT
-
-                                        if (response.equals("{}")) {
+                                        if (response.equals("[]")) {
                                             Toast.makeText(MedecinDepartement.this, "Aucun médecin dans ce département", Toast.LENGTH_SHORT).show();
                                             messageMedDep.setText("Aucun médecin dans ce département");
-                                            Log.i("TAG", "################# AUCUN MEDECIN ####################");//DEVELOPPEMENT
 
                                         } else {
-                                            Log.i("TAG", "################# LISTMEDECIN NON NULL ####################");//DEVELOPPEMENT
                                             ObjectMapper mapper = new ObjectMapper();
                                             try {
                                                 ArrayList<Medecin> medecinList = mapper.readValue(response, new TypeReference<ArrayList<Medecin>>() {});
@@ -92,8 +87,7 @@ public class MedecinDepartement extends AppCompatActivity{
                                 }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                messageMedDep.setText("Aucun médecin dans ce département");
-                                Toast.makeText(MedecinDepartement.this, "ça marche pas...", Toast.LENGTH_SHORT).show();//DEVELOPPEMENT
+                                Toast.makeText(MedecinDepartement.this, "une erreur est survenu, réessayer plus tard...", Toast.LENGTH_SHORT).show();//DEVELOPPEMENT
                                 Log.i("TAG", error.toString());//DEVELOPPEMENT
                             }
                         });
@@ -102,7 +96,7 @@ public class MedecinDepartement extends AppCompatActivity{
                     }
                     //If it's not an integer
                     catch (NumberFormatException e){
-                        Log.e("TAG", "######################## NOT AN INT ########################");
+                        messageMedDep.setText("Veulliez saisir un numéro valable");
                         e.printStackTrace();
                     }
                 }else{

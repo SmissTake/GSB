@@ -1,8 +1,6 @@
 package com.example.gsb;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -60,14 +58,9 @@ public class Departement extends AppCompatActivity {
 
                                 ArrayAdapter<DepartementObjet> adapter = new ArrayAdapter<DepartementObjet>(getBaseContext(), android.R.layout.simple_list_item_1, departement);
                                 lvListDep.setAdapter(adapter);
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        pbLoadDep.setVisibility(View.INVISIBLE);
-                                        lvListDep.setVisibility(View.VISIBLE);
-                                    }
-                                }, 1000);
+
+                                pbLoadDep.setVisibility(View.INVISIBLE);
+                                lvListDep.setVisibility(View.VISIBLE);
 
                             } catch (IOException e) {
                                 Log.e("TAG", e.toString());

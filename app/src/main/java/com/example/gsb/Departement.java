@@ -30,6 +30,10 @@ public class Departement extends AppCompatActivity {
     private ListView lvListDep;
     private ProgressBar pbLoadDep;
 
+    /**
+     * permet de faire un appel à une API et récupère les départements dans lesquels il y à des médecins
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,14 +52,16 @@ public class Departement extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-                        if (response.equals("[]")) {
+                        if (response.equals("{}")) {
                             Toast.makeText(Departement.this, "Aucun Departement", Toast.LENGTH_SHORT).show();
                         } else {
+                            /* si la réponse contient des éléments, création d'un nouvelle objet objectmapper */
                             ObjectMapper mapper = new ObjectMapper();
                             try {
+
                                 ArrayList<DepartementObjet> departement = mapper.readValue(response, new TypeReference<ArrayList<DepartementObjet>>() {});
 
-
+                                lvListDep = findViewById(R.id.lvListDep);
                                 ArrayAdapter<DepartementObjet> adapter = new ArrayAdapter<DepartementObjet>(getBaseContext(), android.R.layout.simple_list_item_1, departement);
                                 lvListDep.setAdapter(adapter);
 

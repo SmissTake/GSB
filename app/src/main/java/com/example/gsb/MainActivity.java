@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * page d'accueil de l'application
+ */
 public class MainActivity extends AppCompatActivity {
 
     private Button btnDep;

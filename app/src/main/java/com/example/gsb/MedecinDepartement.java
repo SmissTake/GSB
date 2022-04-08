@@ -24,6 +24,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * code pour faire un appel à l'API est récupérer les j
+ */
 public class MedecinDepartement extends AppCompatActivity{
 
     private EditText etNumDep;

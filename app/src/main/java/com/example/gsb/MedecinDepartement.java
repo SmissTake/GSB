@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * code pour faire un appel à l'API est récupérer les j
+ * Class permettant de rechercher les médecins d'un département en indiquant le numéro de ce dernier.
  */
 public class MedecinDepartement extends AppCompatActivity{
 

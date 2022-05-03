@@ -3,6 +3,11 @@ package com.example.gsb;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Class DepartementObject
+ *
+ * Class permettant de représenter un Département
+ */
 public class DepartementObjet {
     private int numero;
 

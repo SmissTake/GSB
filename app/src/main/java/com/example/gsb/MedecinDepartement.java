@@ -25,7 +25,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * code pour faire un appel à l'API est récupérer les j
+ * Activity MedecinDepartement
+ *
+ * Activité permettant de rechercher les médecins d'un département grâce au numéro de ce dernier
  */
 public class MedecinDepartement extends AppCompatActivity{
 
@@ -34,6 +36,7 @@ public class MedecinDepartement extends AppCompatActivity{
     private TextView messageMedDep;
     private int numDep;
     private ListView lvResultMedDep;
+    private TextView coeffLibMedDep;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -43,10 +46,14 @@ public class MedecinDepartement extends AppCompatActivity{
         btnRechMedDep = (Button) findViewById(R.id.btnRechMedDep);
         etNumDep = (EditText) findViewById(R.id.etNumDep);
         messageMedDep = (TextView) findViewById(R.id.messageMedDep);
+        coeffLibMedDep = (TextView) findViewById(R.id.coeffLibMedDep);
+        coeffLibMedDep.setVisibility(View.INVISIBLE);
+
         btnRechMedDep.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 //Si le champs de recherche est bien renseigné
+                lvResultMedDep = findViewById(R.id.lvResultMedDep);
                 if(!etNumDep.getText().toString().equals("")){
                     try {
                         numDep = Integer.parseInt(etNumDep.getText().toString());
@@ -56,16 +63,25 @@ public class MedecinDepartement extends AppCompatActivity{
 
                         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                                 new Response.Listener<String>() {
+                                    /**
+                                     * Méthode s'exécutant lors de la réponse de l'API Volley
+                                     *
+                                     * @param response
+                                     */
                                     @Override
                                     public void onResponse(String response) {
                                         if (response.equals("[]")) {
+                                            coeffLibMedDep.setVisibility(View.INVISIBLE);
                                             Toast.makeText(MedecinDepartement.this, "Aucun médecin dans ce département", Toast.LENGTH_SHORT).show();
                                             messageMedDep.setText("Aucun médecin dans ce département");
+                                            lvResultMedDep.setAdapter(null);
 
                                         } else {
                                             ObjectMapper mapper = new ObjectMapper();
                                             try {
                                                 ArrayList<Medecin> medecinList = mapper.readValue(response, new TypeReference<ArrayList<Medecin>>() {});
+
+                                                coeffLibMedDep.setVisibility(View.VISIBLE);
 
                                                 lvResultMedDep = findViewById(R.id.lvResultMedDep);
                                                 MedecinArrayAdapter adapter = new MedecinArrayAdapter(getBaseContext(), android.R.layout.simple_list_item_1, medecinList);
@@ -88,10 +104,19 @@ public class MedecinDepartement extends AppCompatActivity{
                                         }
                                     }
                                 }, new Response.ErrorListener() {
+                            /**
+                             * Méthode s'exécutant dans le cas d'une erreur lors de la réponse de l'API Volley
+                             *
+                             * @param error
+                             */
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(MedecinDepartement.this, "une erreur est survenu, réessayer plus tard...", Toast.LENGTH_SHORT).show();//DEVELOPPEMENT
-                                Log.i("TAG", error.toString());//DEVELOPPEMENT
+                                Toast.makeText(MedecinDepartement.this, "une erreur est survenue, réessayer plus tard...", Toast.LENGTH_SHORT).show();
+                                messageMedDep.setText("une erreur est survenue, réessayer plus tard...");
+
+                                coeffLibMedDep.setVisibility(View.INVISIBLE);
+                                Log.i("TAG", error.toString());
+                                lvResultMedDep.setAdapter(null);
                             }
                         });
 
@@ -99,11 +124,17 @@ public class MedecinDepartement extends AppCompatActivity{
                     }
                     //If it's not an integer
                     catch (NumberFormatException e){
-                        messageMedDep.setText("Veulliez saisir un numéro valable");
+                        Toast.makeText(MedecinDepartement.this, "Veuillez saisir un numéro valable", Toast.LENGTH_SHORT).show();
+                        messageMedDep.setText("Veuillez saisir un numéro valable");
+                        lvResultMedDep.setAdapter(null);
+                        coeffLibMedDep.setVisibility(View.INVISIBLE);
                         e.printStackTrace();
                     }
                 }else{
-                    Toast.makeText(MedecinDepartement.this, "Aucun numéro de département saisie", Toast.LENGTH_SHORT).show();
+                    messageMedDep.setText("Aucun numéro de département saisi");
+                    Toast.makeText(MedecinDepartement.this, "Aucun numéro de département saisi", Toast.LENGTH_SHORT).show();
+                    lvResultMedDep.setAdapter(null);
+                    coeffLibMedDep.setVisibility(View.INVISIBLE);
                 }
             }
         });

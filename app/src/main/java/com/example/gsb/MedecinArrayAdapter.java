@@ -12,6 +12,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class MedecinArrayAdapter
+ *
+ * Class permettant de créer une ListView d'objet Médecin personnalisée
+ */
 public class MedecinArrayAdapter extends ArrayAdapter<Medecin> {
     private List<Medecin> MedecinList;
 

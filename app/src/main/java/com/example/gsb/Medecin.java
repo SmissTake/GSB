@@ -3,6 +3,11 @@ package com.example.gsb;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Class Medecin
+ *
+ * Class permettant de représenter un Médecin
+ */
 public class Medecin {
 
     private int numero;
@@ -43,7 +48,7 @@ public class Medecin {
     }
 
     /**
-     *  redéfinitionde la méthode toString
+     *  redéfinition de la méthode toString
      * @return
      */
     @Override
@@ -103,6 +108,10 @@ public class Medecin {
         this.ville = ville;
     }
 
+    /**
+     * setter de typeLibelle
+     * @param typeLibelle
+     */
     public void setTypeLibelle(String typeLibelle) {
         this.typeLibelle = typeLibelle;
     }

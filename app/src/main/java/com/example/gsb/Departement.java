@@ -25,13 +25,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Activity Departement
+ *
+ * Activité permettant de voir la liste de tous les départements où au moins un médecin a été recensé
+ */
 public class Departement extends AppCompatActivity {
 
     private ListView lvListDep;
     private ProgressBar pbLoadDep;
 
     /**
-     * permet de faire un appel à une API et récupère les départements dans lesquels il y à des médecins
+     * Permet de faire un appel à une API et récupère les départements dans lesquels il y à des médecins
      * @param savedInstanceState
      */
     @Override
@@ -70,14 +75,15 @@ public class Departement extends AppCompatActivity {
 
                             } catch (IOException e) {
                                 Log.e("TAG", e.toString());
-                                Toast.makeText(Departement.this, "une erreur est survenu, réessayer plus tard...", Toast.LENGTH_SHORT).show();
-
+                                Toast.makeText(Departement.this, "une erreur est survenue, réessayez plus tard...", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Departement.this, "une erreur est survenue, réessayez plus tard...", Toast.LENGTH_SHORT).show();
+                Log.i("TAG", error.toString());
             }
         });
         queue.add(stringRequest);

@@ -6,6 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+/**
+ * Activity SplashGSB
+ *
+ * Activité (écran) de démarrage
+ */
 public class SplashGSB extends AppCompatActivity {
 
     @Override

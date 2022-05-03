@@ -28,11 +28,17 @@ import org.w3c.dom.Text;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Activity RechercheNom
+ *
+ * Activité permettant de voir tous les médecins portant un nom donné
+ */
 public class RechercheNom extends AppCompatActivity{
 
     private EditText etNomMed;
     private Button btnRechNomMed;
     private TextView messageRechMed;
+    private TextView lvCoeffRechMed;
 
     private ListView lvResultNomMed;
 
@@ -44,6 +50,9 @@ public class RechercheNom extends AppCompatActivity{
         btnRechNomMed = (Button) findViewById(R.id.btnRechNomMed);
         etNomMed = (EditText) findViewById(R.id.etNomMed);
         messageRechMed = (TextView) findViewById(R.id.messageRechNom);
+        lvCoeffRechMed = (TextView) findViewById(R.id.lvCoeffRechMed);
+        lvCoeffRechMed.setVisibility(View.INVISIBLE);
+        lvResultNomMed = findViewById(R.id.lvResultNomMed);
 
         btnRechNomMed.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -59,16 +68,16 @@ public class RechercheNom extends AppCompatActivity{
                                 public void onResponse(String response) {
 
                                     if (response.equals("[]")) {
-                                        messageRechMed.setText("Aucun médecin dans ce département");
-
+                                        messageRechMed.setText("Aucun médecin correspondant à la recherche");
+                                        lvCoeffRechMed.setVisibility(View.INVISIBLE);
                                     } else {
                                         ObjectMapper mapper = new ObjectMapper();
                                         try {
                                             ArrayList<Medecin> medecinList = mapper.readValue(response, new TypeReference<ArrayList<Medecin>>() {});
 
-                                            lvResultNomMed = findViewById(R.id.lvResultNomMed);
                                             MedecinArrayAdapter adapter = new MedecinArrayAdapter(getBaseContext(), android.R.layout.simple_list_item_1, medecinList);
                                             lvResultNomMed.setAdapter(adapter);
+                                            lvCoeffRechMed.setVisibility(View.VISIBLE);
 
 
                                             if (medecinList.size()>1){
@@ -81,6 +90,9 @@ public class RechercheNom extends AppCompatActivity{
                                             }
 
                                         } catch (IOException e) {
+                                            lvCoeffRechMed.setVisibility(View.INVISIBLE);
+                                            Toast.makeText(RechercheNom.this, "Une erreur est survenue, réessayez plus tard...", Toast.LENGTH_SHORT).show();
+                                            messageRechMed.setText("Une erreur est survenue, réessayez plus tard...");
                                             Log.e("TAG",e.toString());
                                         }
 
@@ -89,14 +101,18 @@ public class RechercheNom extends AppCompatActivity{
                             }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(RechercheNom.this, "une erreur est survenu, réessayer plus tard...", Toast.LENGTH_SHORT).show();
+                            lvCoeffRechMed.setVisibility(View.INVISIBLE);
+                            Toast.makeText(RechercheNom.this, "Une erreur est survenue, réessayez plus tard...", Toast.LENGTH_SHORT).show();
+                            messageRechMed.setText("Une erreur est survenue, réessayez plus tard...");
                             Log.i("TAG", error.toString());
                         }
                     });
 
                     queue.add(stringRequest);
                 }else{
-                    Toast.makeText(RechercheNom.this, "Aucun nom saisie", Toast.LENGTH_SHORT).show();
+                    lvCoeffRechMed.setVisibility(View.INVISIBLE);
+                    Toast.makeText(RechercheNom.this, "Aucun nom saisi", Toast.LENGTH_SHORT).show();
+                    messageRechMed.setText("Aucun nom saisi");
                 }
             }
         });
